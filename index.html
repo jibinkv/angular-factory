@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link data-require="bootstrap-css@*" data-semver="3.2.0" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+  
+  <div id="wrapper">
+    <h1>Temperature Monitor</h1>
+    <div id="container">
+      <main data-ng-app="medianApp">
+        <div data-ng-controller="formController">
+          <form name="medianForm">
+              <label for="temperature">Add Temperture:</label>
+              <input type="number" name="tmpr" data-ng-model="temperature" placeholder="Enter Temperatures..." required>
+              <span style="color:red" ng-show="medianForm.tmpr.$dirty && medianForm.tmpr.$invalid">
+              <span ng-show="medianForm.tmpr.$error.required">Please enter a temperature</span></span>
+
+              <button class="btn btn-primary" data-ng-click="addNewTemperature(temperature)" ng-disabled="medianForm.tmpr.$dirty && medianForm.tmpr.$invalid && medianForm.tmpr.$error.required">Add</button>
+        
+                  <ul data-ng-repeat="temperature in temperatureList | filter: temperature" class="ng-scope ng-binding">
+                   <li>{{ temperatureList }}</li>
+                  </ul>
+        
+              <hr />
+              <section>
+                <button class="btn btn-primary" data-ng-click="getMedian(temperatureList)">Get Median Temperture</button>
+              <p class="median">Current Median: {{ median }} </p>
+              </section>
+              <p class="dev-name">developer name: --Jibin K Varghese--</p>
+              <hr>
+        </form>
+      </div>
+    </main>
+    <hr>
+    <a href="jasmine-test-runner.html">Run Unit Tests</a>
+  </div>
+</div>
+  <script data-require="angular.js@*" data-semver="1.3.5" src="https://code.angularjs.org/1.3.5/angular.js"></script>
+  
+  <script src="medianApp.js"></script>
+  <script src="temperatureMonitor.js"></script>
+  </body>
+
+</html>
